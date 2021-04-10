@@ -15,6 +15,7 @@ const User = require('./models/user');
 const adminRoute = require('./routers/admin') ;
 const busRoute = require('./routers/buses') ;
 const authRoute = require('./routers/auth');
+const indexRoute = require('./routers/index') ;
 
 const MONGODB_URI = `mongodb+srv://myBus:mybus@cluster0.f8xh1.mongodb.net/Bus-Station?retryWrites=true&w=majority`;
 
@@ -45,6 +46,7 @@ app.set('views', 'views');
 app.use('/admin' , adminRoute) ;
 app.use(busRoute) ;
 app.use(authRoute);
+app.use(indexRoute) ;
 
 app.use((error , req , res , next) => {
     error.statusCode = error.statusCode || 500 ;
