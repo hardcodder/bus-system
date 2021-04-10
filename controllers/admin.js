@@ -3,13 +3,14 @@ const Bus = require('../models/bus') ;
 module.exports.postaddBus = async (req , res , next) => {
     
     
-    const name = req.body.name ;
+    const name = req.body.name.toLowerCase() ;
     const number = req.body.number ;
-    const type = req.body.type ;
+    const type = req.body.type.toLowerCase() ;
     const cost = req.body.cost ;
-    const schedule = req.body.schedule ;
+    const to = req.body.to.toLowerCase() ;
+    const from = req.body.from.toLowerCase() ;
     const persons = [] ;
-    const capacity = req.body.capacity ;
+    const capacity = Number(req.body.capacity) ;
 
     try
     {
@@ -18,7 +19,8 @@ module.exports.postaddBus = async (req , res , next) => {
             number : number ,
             type : type ,
             cost : cost ,
-            schedule : schedule ,
+            to : to ,
+            from : from ,
             persons : persons ,
             capacity : capacity 
         }) ;

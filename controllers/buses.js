@@ -54,9 +54,9 @@ module.exports.addReservation = async (req , res , next) => {
             }
             else
             {
-                const name = req.body.name ;
-                const age = req.body.age ;
-                let ind = bus.persons.findIndex(person => person.name == name) ;
+                const userId = req.user._id ;
+                let ind = bus.persons.findIndex(person => String(person) == String(userId)) ;
+                console.log(ind) ;
                 if(ind != -1)
                 {
                     res.status(200).json({
@@ -65,11 +65,9 @@ module.exports.addReservation = async (req , res , next) => {
                 }
                 else
                 {
-                    const user = {
-                        name : name ,
-                        age : age
-                    } ;
-                    bus.persons.push(user) ;
+                    let persons = [...bus.persons] ;
+                    persons.push(userId) ;
+                    bus.persons = persons ;
                     await bus.save() ;
                     res.status(201).json({
                         message : "Your seat is reserved"
@@ -96,8 +94,7 @@ module.exports.removeReservation =async (req , res , next) => {
         const bus = await Bus.findOne({number:number}) ;
         if(bus)
         {
-            const name = req.body.name ;
-            let ind = bus.persons.findIndex(person => person.name == name) ;
+            let ind = bus.persons.findIndex(person => String(person) == String(req.user._id)) ;
             if(ind == -1)
             {
                 res.status(404).json({
@@ -106,7 +103,8 @@ module.exports.removeReservation =async (req , res , next) => {
             }
             else
             {
-                const persons = bus.persons.filter(person => person.name != name) ;
+                let persons = [...bus.persons] ;
+                persons = persons.filter(person => String(person) != String(req.user._id)) ;
                 bus.persons = persons;
                 await bus.save() ;
                 res.status(201).json({
@@ -121,6 +119,22 @@ module.exports.removeReservation =async (req , res , next) => {
                 error : "No bus with this number found"
             })
         }
+    }
+    catch(err)
+    {
+        throw(err) ;
+    }
+}
+
+module.exports.getBusesForRoute = async (req , res , next) => {
+    try
+    {
+        const to = req.body.to ;
+        const from = req.body.from ;
+        const buses = await Bus.find({to:to , from :from}) ;
+        res.json({
+            buses : buses
+        }) ;
     }
     catch(err)
     {

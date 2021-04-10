@@ -43,6 +43,22 @@ app.use(
 app.set('view engine', 'ejs');
 app.set('views', 'views');
 
+app.use(async (req , res , next) => {
+    // if(req.session.user)
+    // {
+    //     const id = req.session.user._id ;
+    //     const user = await User.findById(id) ;
+    //     if(user)
+    //     {
+    //         req.user = user ;
+    //     }
+    // }
+    const user = await User.findOne({email : 'dhiman.anshul863@gmail.com'}) ;
+    req.user = user ;
+    next() ;
+})
+
+
 app.use('/admin' , adminRoute) ;
 app.use(busRoute) ;
 app.use(authRoute);
