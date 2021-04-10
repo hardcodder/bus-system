@@ -1,6 +1,6 @@
 const Bus = require('../models/bus') ;
 
-module.exports.getAllBuses =async (req , res  , next) => {
+module.exports.getAllBuses = async (req , res , next) => {
     try
     {
         const buses = await Bus.find() ;

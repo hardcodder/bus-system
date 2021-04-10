@@ -31,7 +31,7 @@ const busSchema = new Schema({
     ] ,
     capacity : {
         type : Number ,
-        required : true 
+        required : true
     }
 }) ;
 

@@ -10,4 +10,4 @@ router.post('/reserve' , busController.addReservation) ;
 
 router.post('/cancel-reservation' , busController.removeReservation) ;
 
-module.exports = router ;
+module.exports = router;
