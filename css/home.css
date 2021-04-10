@@ -183,15 +183,13 @@ input[type="text"]::-webkit-input-placeholder {
     border-radius: 50%;
 }
 
-@media (max-width: 880px) {
+@media (max-width: 360px) {
 
-	.site-footer .footer-left,
-	.site-footer .footer-right{
-		display: block;
-		width: 100%;
-		margin-bottom: 40px;
-		text-align: center;
-	}
+	.owl-dot .owl-dots .owl-dot.active .owl-dot:hover{
+    background:transparent;
+    border: transparent;
+    box-shadow: transparent;
+  }
 
 }
 
