@@ -31,7 +31,8 @@ body{
 
 .btn{
     border-radius: 20px;
-    background-color: #253873;
+    background-color: #13274F;
+    color: #F0F0F0;
     border-color: transparent;
     cursor: pointer;
     width: 100%;
@@ -65,9 +66,9 @@ body{
   }
 
 .navbar {
-    background-color: #13274F;
     font-size: 18px;
-    padding: .5rem 1rem;
+    background-color:#002244;
+    padding: 0rem 0rem;
 }
 
 @media (max-width: 700px) {
@@ -79,8 +80,9 @@ body{
 
 @media (max-width: 400px) {
     .navbar {
-        background-color:#253873 ;
-        padding: .5rem .5rem;
+        font-size: 18px;
+        background-color:#002244;
+        padding: 0rem 0rem;
     }
     .navbar-brand{
         font-size: 0.9rem;

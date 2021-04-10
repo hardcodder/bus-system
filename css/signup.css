@@ -36,6 +36,7 @@ body{
 .btn{
     border-radius: 20px;
     background-color: #253873;
+    color: #F0F0F0;
     border-color: transparent;
     cursor: pointer;
     width: 100%;
@@ -51,9 +52,9 @@ body{
   }
 
 .navbar {
-    background-color: #13274F;
     font-size: 18px;
-    padding: .5rem 1rem;
+    background-color:#002244;
+    padding: 0rem 0rem;
 }
 
 @media (max-width: 400px) {

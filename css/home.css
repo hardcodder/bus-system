@@ -72,8 +72,8 @@ input[type="text"]::-webkit-input-placeholder {
 
 .navbar {
     font-size: 18px;
-    background-color:#13274F;
-    padding: 0.5rem 1rem;
+    background-color:#002244;
+    padding: 0rem 0rem;
 }
 
 .wrapper{
@@ -145,8 +145,7 @@ input[type="text"]::-webkit-input-placeholder {
 	bottom: 0;
 }
 .site-footer{
-	background:url('../images/7.jpg');
-    background-size: cover;
+	background-color: #13274F;
 	box-sizing: border-box;
     width: 100%;
     text-align: center;

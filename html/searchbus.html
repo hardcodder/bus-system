@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0 shrink-to-fit=no">
-    <title>Home</title>
+    <title>Search Bus</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="../css/home.css">
+    <link rel="stylesheet" href="../css/searchbus.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
@@ -58,61 +58,54 @@
     </div>
 </header>
 
-<div class="wrapper">
-  <h2>Book your bus with these easy steps</h2>
-  <div class="carousel owl-carousel">
-    <div class="card card-1">
-Enter your starting point</div>
-<div class="card card-2">
-Enter your destination</div>
-<div class="card card-3">
-Click on the search button</div>
-<div class="card card-4">
-Select any available bus</div>
-<div class="card card-5">
-Click on book my bus button</div>
-<div class="card card-6">
-Pay and confirm the booking</div>
-</div>
-</div>
-<script>
-  $(".carousel").owlCarousel({
-    margin: 20,
-    loop: true,
-    autoplay: true,
-    autoplayTimeout: 2000,
-    autoplayHoverPause: true,
-    responsive: {
-      0:{
-        items:1,
-        nav: false
-      },
-      600:{
-        items:2,
-        nav: false
-      },
-      1000:{
-        items:3,
-        nav: false
-      }
-    }
-  });
-</script>
-
-<footer class="site-footer">
-  <div class="container">
-  <div style="text-align: center;" class = "row d-flex justify-content-center">
-  You can contact us through:
-  </div>
-  <div style="text-align: center;" class = "row d-flex justify-content-center">
-      Gmail <a style = "color: cornflowerblue;" href = "mailto: mybus0101@gmail.com"> :-  mybus0101@gmail.com </a> 
+<ul class="d-flex row justify-content-around no-bullets">
+   <li class="p-3 mb-5 bg-white rounded col col-xl-3 col-lg-5 col-md-5 col-sm-8 col-10 mx-3">
+       <h4 style="text-align: center;">Name of bus</h4>
+       <hr>
+       <div class="d-flex justify-content-between">
+          <h4>Available seats</h4>
+          <h4>8</h4>
+       </div>
+       <hr>
+       <div class="d-flex justify-content-between">
+        <h4>Price</h4>
+        <h4>300</h4>
+     </div>
+     <hr>
+     <button class="btn">Book the bus</button>
+   </li>
+   <li class="p-3 mb-5 bg-white rounded col col-xl-3 col-lg-5 col-md-5 col-sm-8 col-10 mx-3">
+    <h4 style="text-align: center;">Name of bus</h4>
+    <hr>
+    <div class="d-flex justify-content-between">
+       <h4>Available seats</h4>
+       <h4>8</h4>
+    </div>
+    <hr>
+    <div class="d-flex justify-content-between">
+     <h4>Price</h4>
+     <h4>300</h4>
   </div>
   <hr>
+  <button class="btn">Book the bus</button>
+</li>
+<li class="p-3 mb-5 bg-white rounded col col-xl-3 col-lg-5 col-md-5 col-sm-8 col-10 mx-3">
+       <h4 style="text-align: center;">Name of bus</h4>
+       <hr>
+       <div class="d-flex justify-content-between">
+          <h4>Available seats</h4>
+          <h4>8</h4>
+       </div>
+       <hr>
+       <div class="d-flex justify-content-between">
+        <h4>Price</h4>
+        <h4>300</h4>
+     </div>
+     <hr>
+     <button class="btn">Book the bus</button>
+   </li>
+</ul>
 
-  <div style="text-align: center;" class = "row d-flex justify-content-center">
-      <a style = "color: cornflowerblue;" target="_blank" href="/about-us">About Us</a>
-  </div>
-</footer>
 
 </body>
 </html>
