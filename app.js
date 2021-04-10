@@ -1,16 +1,50 @@
 const express = require('express') ;
+
 const mongoose = require('mongoose') ;
+
 const bodyParser = require('body-parser') ;
+
+const path = require("path") ;
+
+const session = require('express-session');
+
+const MongoDBStore = require('connect-mongodb-session')(session);
+
+const User = require('./models/user');
+
 const adminRoute = require('./routers/admin') ;
 const busRoute = require('./routers/buses') ;
+const authRoute = require('./routers/auth');
+
+const MONGODB_URI = `mongodb+srv://myBus:mybus@cluster0.f8xh1.mongodb.net/Bus-Station?retryWrites=true&w=majority`;
+
 const app = express() ;
 
-const MONGODB_URI = `mongodb+srv://Anshul:anshul@cluster0.pk8vb.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`
+const store = new MongoDBStore({
+    uri: MONGODB_URI,
+    collection: 'sessions'
+});
 
 app.use(bodyParser.json()) ;
 
+app.use(bodyParser.urlencoded({extended:false}));
+app.use(express.static(path.join(__dirname ,'public'))) ;
+
+app.use(
+    session({ 
+        secret: 'my secret', 
+        resave: false, 
+        saveUninitialized: false ,
+        store: store
+    })
+);
+
+app.set('view engine', 'ejs');
+app.set('views', 'views');
+
 app.use('/admin' , adminRoute) ;
 app.use(busRoute) ;
+app.use(authRoute);
 
 app.use((error , req , res , next) => {
     error.statusCode = error.statusCode || 500 ;
