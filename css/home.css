@@ -3,6 +3,8 @@ body{
     font-family: Poppins;
     text-align: center;
     align-items: center;
+    background: url('../images/5.jpg') center;
+    background-size: cover;
 }
 
 header.masthead{
@@ -16,7 +18,7 @@ header.masthead{
 
 header.masthead::before{
     content:'';
-    background: url('../images/2584.jpg') no-repeat center;
+    background: url('../images/22.jpg') no-repeat center;
     background-size: cover;
     opacity:0.7;
     top: 0px;
@@ -36,39 +38,39 @@ header.masthead .overlay {
 }
 
 input[type="text"]::-webkit-input-placeholder {
-    color: #383838;
+  color: #F0F0F0;
 }
 .form-row input{
-    border-radius: 20px;
-    font-size: 16px;
-    opacity:0.8;
+  border-radius: 20px;
+  font-size: 16px;
+  opacity:0.9;
 }
 
 .form-control:valid{
-    background-color: #F0F0F0CC;
-    color:#1a2228;    
+  background-color: #4C516DCC;
+  color:#F0F0F0;    
 }
 
 .btn{
-    border-radius: 20px;
-    background-color: #F0F0F0;
-    opacity: 0.95;
-    border-color: transparent;
-    color: 	#253873;
-    font-size: 16px;
-    font-weight: 800;
-    cursor: pointer;
-    width: 100%;
+  border-radius: 20px;
+  background-color: #13274F;
+  opacity: 0.95;
+  border-color: transparent;
+  color: #F0F0F0;
+  font-size: 16px;
+  font-weight: 800;
+  cursor: pointer;
+  width: 100%;
 }
 
 .btn:hover,
-  .btn:active , .btn:focus{
-    background-color: #F0F0F0;
-    color: 	#253873;
-    opacity: 0.7;
-    border: none;
-    outline: none !important;
-  }
+.btn:active , .btn:focus{
+  background-color: #C0C0C0;
+  color: 	#13274F;
+  opacity: 0.7;
+  border: none;
+  outline: none !important;
+}
 
 .navbar {
     font-size: 18px;
@@ -81,8 +83,6 @@ input[type="text"]::-webkit-input-placeholder {
     padding-bottom: 2%;
     width: 100%;
     color: #13274F;
-    background: url('../images/7.jpg') center;
-    background-size: cover;
   }
   .carousel{
     max-width: 1200px;
@@ -145,7 +145,7 @@ input[type="text"]::-webkit-input-placeholder {
 	bottom: 0;
 }
 .site-footer{
-	background-color: #13274F;
+	background-color: #002244;
 	box-sizing: border-box;
     width: 100%;
     text-align: center;

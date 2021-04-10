@@ -1,7 +1,7 @@
 body{
     font-size: 14px;
     font-family: Poppins;
-    background:url('../images/5.jpg') center;
+    background:url('../images/10.jpg') center;
     background-size: cover;
     text-align: center;
     align-items: center;
@@ -18,7 +18,7 @@ header.masthead{
 
 header.masthead::before{
     content:'';
-    background: url('../images/22.jpg') no-repeat center;
+    background: url('../images/2584.jpg') no-repeat center;
     background-size: cover;
     opacity:0.7;
     top: 0px;
@@ -38,17 +38,17 @@ header.masthead .overlay {
 }
 
 input[type="text"]::-webkit-input-placeholder {
-    color: #F0F0F0;
+    color: #383838;
 }
 .form-row input{
     border-radius: 20px;
     font-size: 16px;
-    opacity:0.9;
+    opacity:0.8;
 }
 
 .form-control:valid{
-    background-color: #4C516DCC;
-    color:#F0F0F0;    
+    background-color: #F0F0F0CC;
+    color:#1a2228;    
 }
 
 .btn{
@@ -66,6 +66,27 @@ input[type="text"]::-webkit-input-placeholder {
   .btn:active , .btn:focus{
     background-color: #C0C0C0;
     color: 	#13274F;
+    opacity: 0.9;
+    border: none;
+    outline: none !important;
+  }
+
+  .btn-mast{
+    border-radius: 20px;
+    background-color: #F0F0F0;
+    opacity: 0.95;
+    border-color: transparent;
+    color: 	#253873;
+    font-size: 16px;
+    font-weight: 800;
+    cursor: pointer;
+    width: 100%;
+}
+
+.btn-mast:hover,
+  .btn-mast:active , .btn-mast:focus{
+    background-color: #F0F0F0;
+    color: 	#253873;
     opacity: 0.7;
     border: none;
     outline: none !important;
@@ -85,5 +106,5 @@ ul.no-bullets {
   }
 
 .inner-list{
-    background-color: #F0F8FF;
+    background-color: #F0F0F0;
 }
