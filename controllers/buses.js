@@ -92,7 +92,7 @@ module.exports.addReservation = async (req , res , next) => {
                         persons.push(userId) ;
                         bus.persons = persons ;
                         bus = await bus.save() ;
-                        let user = await User.findById(req.user._id) ;
+                        let user = await User.findById(userId) ;
                         let bookings = [...user.bookings] ;
                         bookings.push(bus._id) ;
                         user.bookings = bookings ;
