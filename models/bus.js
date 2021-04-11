@@ -19,19 +19,28 @@ const busSchema = new Schema({
         type : Number ,
         required : true
     } ,
-    schedule : {
+    to : {
+        type : String , 
+        required : true
+    }  ,
+    from : {
         type : String ,
         required : true 
     } ,
+    timing : {
+        type : String ,
+        required : true
+    } ,
     persons : [
         {
-            type : Object ,
+            type : mongoose.Types.ObjectId ,
+            ref : 'User' ,
             required : true 
         }
     ] ,
     capacity : {
         type : Number ,
-        required : true 
+        required : true
     }
 }) ;
 
