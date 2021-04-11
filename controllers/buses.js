@@ -79,7 +79,7 @@ module.exports.addReservation = async (req , res , next) => {
                 }
                 else
                 {
-                    const userId = req.user._id ;
+                    const userId = order.user ;
                     let ind = bus.persons.findIndex(person => String(person) == String(userId)) ;
                     console.log(ind) ;
                     if(ind != -1)
