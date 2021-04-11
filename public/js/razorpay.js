@@ -25,7 +25,14 @@ async function displayRazorpay(num , cost)
     else
     {
         console.log("in razorpay");
-        let data = await fetch('http://localhost:3000/razorpay', 
+        let url = window.location.href ;
+
+        url = url.split("//") ;
+        console.log(url) ;
+        let fetchUrl = '' + url[0] + '//' ;
+        url = url[1].split('/') ;
+        fetchUrl = fetchUrl + url[0] + '/';
+        let data = await fetch(`${fetchUrl}razorpay`, 
         {
           method : 'POST' ,
           body : JSON.stringify({
