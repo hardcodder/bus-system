@@ -1,0 +1,60 @@
+body{
+    background-image: url('../images/people.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+    font-size: 16px;
+    font-family: Poppins;
+}
+
+.card{
+    margin-top: 5%;
+    padding: 5%;
+    padding-top: 0%;
+    text-align: center;
+    border-radius: 10px;
+    background-color: #f8f8f8;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
+    opacity: 0.8;
+}
+.card-body{
+    padding-top: 6%;
+    text-transform: capitalize;
+    color: #002244;
+    text-shadow: #1a2228;
+    font-weight: 600;
+    font-size: 30px;
+}
+.navbar {
+    font-size: 18px;
+    background-color:#002244;
+    padding: 0rem 0rem;
+}
+
+@media (max-width: 1000px) {
+    .container{
+        margin-top: 10%;
+    }
+}    
+
+@media (max-width: 650px) {
+    body{
+        background-image: url('../images/road.jpg');
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: contain;
+        font-size: 16px;
+        font-family: Poppins;
+    }
+    .navbar {
+        background-color:#002244 ;
+        padding: 0rem 0rem;
+    }
+    .navbar-brand{
+        font-size: 0.9rem;
+    }
+    .container{
+        margin-top: 10%;
+    }
+}    
