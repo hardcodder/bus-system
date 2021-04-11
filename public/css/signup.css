@@ -1,11 +1,11 @@
 body {
-  background-image: url("/icon/58090.jpg");
+  background-image: url("../icon/58090.jpg");
   background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-position: contain;
   font-size: 16px;
-  font-family: Lato;
+  font-family: Poppins;
 }
 
 .form-container {
@@ -34,7 +34,8 @@ body {
 
 .btn {
   border-radius: 20px;
-  background-color: #253873;
+  background-color: #13274f;
+  color: #f0f0f0;
   border-color: transparent;
   cursor: pointer;
   width: 100%;
@@ -51,13 +52,14 @@ body {
 }
 
 .navbar {
-  background-color: #253873;
-  padding: 0.5rem 1rem;
+  font-size: 18px;
+  background-color: #002244;
+  padding: 0rem 0rem;
 }
 
 @media (max-width: 400px) {
   .navbar {
-    background-color: #253873;
+    background-color: #002244;
     padding: 0.5rem 0.5rem;
   }
   .navbar-brand {

@@ -3,14 +3,14 @@
 <body>
     <%- include('../includes/nav.ejs') %>
     <header class="masthead text-black text-center">
-        <div class="overlay"></div>
-        <div class="container">
-            <div class="row">
+        <div class="overlay mt-0"></div>
+        <div class="container mt-0">
+            <div class="row mt-0">
                 <div class="col-md-10 col-lg-8 col-xl-7 mx-auto">
-                    <form>
+                    <form method="POST" action="/getBusesForRoute">
                         <div class="form-row">
-                            <div class="col-12 col-md-4 mb-2 mb-md-0"><input class="form-control form-control-lg" type="text" placeholder="From"/> </div>
-                            <div class="col-12 col-md-4 mb-2 mb-md-0"><input class="form-control form-control-lg" type="text" placeholder="To" /> </div>
+                            <div class="col-12 col-md-4 mb-2 mb-md-0"><input class="form-control form-control-lg" type="text" name="from" placeholder="From"/> </div>
+                            <div class="col-12 col-md-4 mb-2 mb-md-0"><input class="form-control form-control-lg" type="text" name="to" placeholder="To" /> </div>
                             <div class="col-12 col-md-4"><button class="btn btn-block btn-lg btn-primary" type="submit">Search</button></div>
                         </div>
                     </form>

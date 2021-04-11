@@ -1,0 +1,26 @@
+<%- include('../includes/head.ejs') %>
+  <link rel="stylesheet" href="css/myBookings.css">
+<body>
+  <%- include('../includes/nav.ejs') %>
+  <h2>List of Bookings</h2>
+<hr>
+<ul class="d-flex row justify-content-around no-bullets">
+    <% bookings.forEach(booking => {%>
+        <li class="p-3 mb-5 inner-list rounded col col-xl-3 col-lg-5 col-md-5 col-sm-8 col-10 mx-3">
+            <h5 style="text-align: center;"><%=booking.name%></h5>
+            <hr>
+            <h5 style="text-align: center;"><%=booking.number%></h5>
+            <hr>
+            <div class="d-flex justify-content-between">
+                <h5>Timing</h5>
+                <h5>6:00 P.M.</h5>
+            </div>
+            <hr>
+            <div class="d-flex justify-content-between">
+            <h5><%=booking.to%></h5>
+            <h5>to</h5>
+            <h5><%=booking.from%></h5>
+            </div>
+        </li>
+    <%})%>
+ </ul>

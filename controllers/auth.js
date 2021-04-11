@@ -3,9 +3,12 @@ const User = require('../models/user');
 const bcrypt = require('bcryptjs');
 
 module.exports.getSignup = (req, res, next) => {
+    let errMessage = "" ;
     res.render('auth/signup', {
         path: '/signup',
-        title: 'SignUp'
+        title: 'SignUp' ,
+        isAuthenticated : req.user ,
+        errMessage : errMessage
     });
 }
 
@@ -63,7 +66,8 @@ module.exports.postSignup = async(req, res, next) => {
                 res.render('auth/login.ejs', {
                     path: 'login',
                     title: 'LOGIN',
-                    errMessage: errMessage
+                    errMessage: errMessage ,
+                    isAuthenticated : req.user
                 })
             }
         }
@@ -77,7 +81,8 @@ module.exports.postSignup = async(req, res, next) => {
 module.exports.getLogin = (req, res, next) => {
     res.render('auth/login', {
         path: '/login',
-        title: 'Login'
+        title: 'Login' ,
+        isAuthenticated : req.user
     });
 }
 
@@ -111,7 +116,8 @@ module.exports.postLogin = async(req, res, next) => {
                 return res.render('auth/login.ejs', {
                     path: '/login',
                     title: 'LOGIN',
-                    errMessage: errMessage
+                    errMessage: errMessage ,
+                    isAuthenticated : req.user
                 })
             }
         }
@@ -131,5 +137,18 @@ module.exports.postLogin = async(req, res, next) => {
     catch(err)
     {
         console.log(err);
+    }
+}
+
+module.exports.getLogout = (req , res , next) => {
+    try
+    {
+        req.session.destroy( (err) => {
+            res.redirect('/') ;
+        })
+    }
+    catch(err)
+    {
+        next(err) ;
     }
 }

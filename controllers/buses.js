@@ -1,10 +1,18 @@
 const Bus = require('../models/bus') ;
+const razorpay = require('razorpay') ;
+const Order = require('../models/Order') ;
+const User = require('../models/user');
+
+const instance = new razorpay({
+    key_id : 'rzp_test_lTU3DVbvidGbPW' ,
+    key_secret : 'SoFsYterfaUybKSQel7uGO6r'
+}) ;
 
 module.exports.getAllBuses = async (req , res , next) => {
     try
     {
         const buses = await Bus.find() ;
-        res.status(200).json({
+        return res.status(200).json({
             buses :buses
         }) ;
     }
@@ -21,7 +29,7 @@ module.exports.checkAvailability = async (req , res , next) => {
         if(bus)
         {
             let available = bus.capacity - bus.persons.length ;
-            res.status(200).json({
+            return res.status(200).json({
                 isAvailable : available > 0 ,
                 availableSeats : available
             }) ;
@@ -40,51 +48,76 @@ module.exports.checkAvailability = async (req , res , next) => {
 }
 
 module.exports.addReservation = async (req , res , next) => {
-    try{
-        const number = req.body.number ;
-        const bus = await Bus.findOne({number:number}) ;
-        if(bus)
-        {
-            let available = bus.capacity - bus.persons.length ;
-            if(available == 0)
+    try
+    {
+        console.log('hello');
+        //Secret we put in razorpay
+        const SECRET = 'myBUS' ;
+
+        const crypto = require('crypto')
+    
+        const shasum = crypto.createHmac('sha256', SECRET) ;
+        shasum.update(JSON.stringify(req.body))
+        const digest = shasum.digest('hex')
+    
+        //if secret is matched
+        if (digest === req.headers['x-razorpay-signature']) {
+            console.log('request is legit')
+            // process it
+
+            const orderId = req.body.payload.payment.entity.order_id ;
+            //fetching the order from the orderId
+            let order = await Order.findOne({orderId:orderId}) ;
+            let number = order.busNumber ;
+            let bus = await Bus.findOne({number:number}) ;
+            if(bus)
             {
-                res.status(404).json({
-                    error : "No seats available"
-                })
-            }
-            else
-            {
-                const userId = req.user._id ;
-                let ind = bus.persons.findIndex(person => String(person) == String(userId)) ;
-                console.log(ind) ;
-                if(ind != -1)
+                let available = bus.capacity - bus.persons.length ;
+                if(available == 0)
                 {
-                    res.status(200).json({
-                        message : "You have already reserved your seat"
-                    })
+                    
                 }
                 else
                 {
-                    let persons = [...bus.persons] ;
-                    persons.push(userId) ;
-                    bus.persons = persons ;
-                    await bus.save() ;
-                    res.status(201).json({
-                        message : "Your seat is reserved"
-                    })
+                    const userId = req.user._id ;
+                    let ind = bus.persons.findIndex(person => String(person) == String(userId)) ;
+                    console.log(ind) ;
+                    if(ind != -1)
+                    {
+                        
+                    }
+                    else
+                    {
+                        let persons = [...bus.persons] ;
+                        persons.push(userId) ;
+                        bus.persons = persons ;
+                        bus = await bus.save() ;
+                        let user = await User.findById(req.user._id) ;
+                        let bookings = [...user.bookings] ;
+                        bookings.push(bus._id) ;
+                        user.bookings = bookings ;
+                        await user.save() ;
+                    }
                 }
             }
-        }
-        else
-        {
-            res.status(404).json({
-                error : "No bus with this number found"
-            })
+            else
+            {
+                
+            }
+            res.status(200).json({
+                status : 'ok'
+            }) ;
+        } 
+        else {
+            // pass it
+            res.status(200).json({
+                status : 'ok'
+            }) ;
         }
     }
     catch(err)
     {
-        throw(err) ;
+        console.log(err);
     }
 }
 
@@ -97,7 +130,7 @@ module.exports.removeReservation =async (req , res , next) => {
             let ind = bus.persons.findIndex(person => String(person) == String(req.user._id)) ;
             if(ind == -1)
             {
-                res.status(404).json({
+                return res.status(404).json({
                     error: "Your seat is not reserved"
                 })
             }
@@ -107,7 +140,7 @@ module.exports.removeReservation =async (req , res , next) => {
                 persons = persons.filter(person => String(person) != String(req.user._id)) ;
                 bus.persons = persons;
                 await bus.save() ;
-                res.status(201).json({
+                return res.status(201).json({
                     message : "Your reservation is cancelled" 
                 })
             }
@@ -115,7 +148,7 @@ module.exports.removeReservation =async (req , res , next) => {
         }
         else
         {
-            res.status(404).json({
+            return res.status(404).json({
                 error : "No bus with this number found"
             })
         }
@@ -131,13 +164,133 @@ module.exports.getBusesForRoute = async (req , res , next) => {
     {
         const to = req.body.to ;
         const from = req.body.from ;
-        const buses = await Bus.find({to:to , from :from}) ;
-        res.json({
-            buses : buses
-        }) ;
+        let buses = await Bus.find({to:to , from :from}) ;
+        let modifiedBuses = buses.map(bus => {
+            return {
+                ...bus._doc ,
+                available : bus._doc.capacity - bus._doc.persons.length
+            }
+        })
+        console.log(modifiedBuses);
+        return res.render('busViews/searchBus', {
+            path: '/searchBus',
+            title: 'Search Bus' ,
+            buses:modifiedBuses ,
+            isAuthenticated : req.user
+        });
     }
     catch(err)
     {
         throw(err) ;
+    }
+}
+
+module.exports.postRazorpay = async (req , res , next) => {
+    try
+    {
+        //this route will be called after clicking the payment
+
+        //here this is the id of courseType
+        const number = req.body.number ;
+        const userId = req.user._id ;
+        const cost = req.body.cost ;
+        console.log(number);
+        const bus = await Bus.findOne({number:number}) ;
+        console.log(bus) ;
+
+        if(bus)
+        {
+            let available = bus.capacity - bus.persons.length ;
+            if(available == 0)
+            {
+                res.status(400).json({
+                    message : "You have already reserved your seat"
+                })
+            }
+            else
+            {
+                const userId = req.user._id ;
+                let ind = bus.persons.findIndex(person => String(person) == String(userId)) ;
+                console.log(ind) ;
+                if(ind == -1)
+                {
+                    //we are creating a new order associated to it
+                    //we are setting the paymentSuccess to be false
+                    let order = new Order({
+                        busNumber : number ,
+                        user : userId ,
+                        paymentSuccess : false
+                    }) ;
+
+                    order = await order.save() ;
+
+                    const payment_capture = 1 ;
+
+                    //setting the amount according to the course
+                    const amount = Number(cost)  ;
+                
+                    const options = {amount : (amount*100).toString()
+                        , currency : "INR"
+                        , receipt : order._id.toString()
+                        , payment_capture
+                        } ;
+                
+                    //this is a razorpay feature
+                    const response = await instance.orders.create(options) ;
+                    
+                    order.orderId = response.id ;
+                    await order.save() ;
+                    return res.json({
+                        id:response.id ,
+                        currency : response.currency ,
+                        amount : response.amount ,
+                        name:(req.user.name) ,
+                        email:req.user.email ,
+                        receipt : response.receipt
+                    });
+                }
+                else
+                {
+                    res.status(400).json({
+                        error : "Your seat is reserved"
+                    })
+                }
+            }
+        }
+        else
+        {
+            res.status(404).json({
+                error : "No bus with this number found"
+            })
+        }
+        
+    }
+    catch(err)
+    {
+        console.log(err);
+        return res.status(500).json({
+            error : "error"
+        })
+    }   
+}
+
+module.exports.getBookings = async (req , res , next) => {
+    try
+    {
+        const userId = req.user._id ;
+        let user = await User.findById(userId).populate('bookings') ;
+        console.log(user);
+        let errMessage = "" ;
+        return res.render('busViews/manageBookings.ejs', {
+            path: '/manageBookings',
+            title: 'Manage Bookings',
+            errMessage: errMessage ,
+            isAuthenticated : req.user ,
+            bookings : user.bookings
+        })
+    }
+    catch(err)
+    {
+        console.log(err);
     }
 }

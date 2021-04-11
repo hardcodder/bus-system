@@ -64,10 +64,11 @@ body{
     outline: none !important;
   }
 
-.navbar {
-    background-color: #253873;
-    padding: .5rem 1rem;
-}
+  .navbar {
+    font-size: 18px;
+    background-color: #002244;
+    padding: 0rem 0rem;
+  }
 
 @media (max-width: 700px) {
     body{

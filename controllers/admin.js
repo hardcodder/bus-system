@@ -11,7 +11,7 @@ module.exports.postaddBus = async (req , res , next) => {
     const from = req.body.from.toLowerCase() ;
     const persons = [] ;
     const capacity = Number(req.body.capacity) ;
-
+    const timing = req.body.timing ;
     try
     {
         const bus = new Bus({
@@ -22,7 +22,8 @@ module.exports.postaddBus = async (req , res , next) => {
             to : to ,
             from : from ,
             persons : persons ,
-            capacity : capacity 
+            capacity : capacity ,
+            timing : timing
         }) ;
 
         await bus.save() ;

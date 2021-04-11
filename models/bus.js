@@ -27,6 +27,10 @@ const busSchema = new Schema({
         type : String ,
         required : true 
     } ,
+    timing : {
+        type : String ,
+        required : true
+    } ,
     persons : [
         {
             type : mongoose.Types.ObjectId ,
