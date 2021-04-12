@@ -40,15 +40,38 @@ header.masthead .overlay {
 input[type="text"]::-webkit-input-placeholder {
   color: #f0f0f0;
 }
+
+input[type="text"]::placeholder {
+  color: #f0f0f0;
+  opacity: 1; /* Firefox */
+}
+
+input[type="text"]:-ms-input-placeholder { /* Internet Explorer 10-11 */
+ color: #f0f0f0;
+}
+
+input[type="text"]::-ms-input-placeholder { /* Microsoft Edge */
+ color: #f0f0f0;
+}
+
 .form-row input {
   border-radius: 20px;
   font-size: 16px;
+  color: #f0f0f0;
   opacity: 0.9;
 }
 
 .form-control:valid {
   background-color: #4c516dcc;
   color: #f0f0f0;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+    -webkit-text-fill-color: #f0f0f0;
+    transition: background-color 5000s ease-in-out 0s;
 }
 
 .btn {

@@ -32,6 +32,31 @@ body {
   color: #1a2228;
 }
 
+input[type="text"]::-webkit-input-placeholder {
+  color:#707070;
+}
+
+input[type="text"]::placeholder {
+  color: #707070;
+  opacity: 1; /* Firefox */
+}
+
+input[type="text"]:-ms-input-placeholder { /* Internet Explorer 10-11 */
+ color: #707070;
+}
+
+input[type="text"]::-ms-input-placeholder { /* Microsoft Edge */
+ color: #707070;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  -webkit-text-fill-color: #1a2228;
+    transition: background-color 5000s ease-in-out 0s;
+}
+
 .btn {
   border-radius: 20px;
   background-color: #13274f;
