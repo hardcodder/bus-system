@@ -30,6 +30,7 @@ module.exports.postSignup = async(req, res, next) => {
             {
                 path:'signup' ,
                 title:'SIGNUP' ,
+                isAuthenticated : req.user ,
                 errMessage: errMessage
             });
         }
@@ -46,6 +47,7 @@ module.exports.postSignup = async(req, res, next) => {
                 {
                     path:'signup' ,
                     title:'SIGNUP' ,
+                    isAuthenticated : req.user ,
                     errMessage: errMessage
                 });
             }
@@ -130,6 +132,7 @@ module.exports.postLogin = async(req, res, next) => {
             return res.render('auth/login.ejs', {
                 path: '/login',
                 title: 'LOGIN',
+                isAuthenticated : req.user ,
                 errMessage: errMessage
             })
         }
