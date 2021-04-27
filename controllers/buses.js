@@ -123,6 +123,8 @@ module.exports.addReservation = async (req , res , next) => {
 
 module.exports.removeReservation =async (req , res , next) => {
     try{
+        const userId = req.user._id ;
+        let user = await User.findById(userId) ;
         const number = req.body.number ;
         const bus = await Bus.findOne({number:number}) ;
         if(bus)
@@ -131,7 +133,7 @@ module.exports.removeReservation =async (req , res , next) => {
             if(ind == -1)
             {
                 return res.status(404).json({
-                    error: "Your seat is not reserved"
+                    message: "Your seat is not reserved"
                 })
             }
             else
@@ -140,6 +142,10 @@ module.exports.removeReservation =async (req , res , next) => {
                 persons = persons.filter(person => String(person) != String(req.user._id)) ;
                 bus.persons = persons;
                 await bus.save() ;
+                let bookings = [...user.bookings] ;
+                bookings = bookings.filter(booking => String(booking) != String(bus._id)) ;
+                user.bookings = bookings ;
+                await user.save() ;
                 return res.status(201).json({
                     message : "Your reservation is cancelled" 
                 })
@@ -149,7 +155,7 @@ module.exports.removeReservation =async (req , res , next) => {
         else
         {
             return res.status(404).json({
-                error : "No bus with this number found"
+                message : "No bus with this number found"
             })
         }
     }
@@ -162,8 +168,8 @@ module.exports.removeReservation =async (req , res , next) => {
 module.exports.getBusesForRoute = async (req , res , next) => {
     try
     {
-        const to = req.body.to ;
-        const from = req.body.from ;
+        const to = req.body.to.toLowerCase() ;
+        const from = req.body.from.toLowerCase() ;
         let buses = await Bus.find({to:to , from :from}) ;
         let modifiedBuses = buses.map(bus => {
             return {
@@ -190,7 +196,6 @@ module.exports.postRazorpay = async (req , res , next) => {
     {
         //this route will be called after clicking the payment
 
-        //here this is the id of courseType
         const number = req.body.number ;
         const userId = req.user._id ;
         const cost = req.body.cost ;
@@ -204,7 +209,7 @@ module.exports.postRazorpay = async (req , res , next) => {
             if(available == 0)
             {
                 res.status(400).json({
-                    message : "You have already reserved your seat"
+                    message : "No seats left in bus"
                 })
             }
             else
@@ -226,7 +231,7 @@ module.exports.postRazorpay = async (req , res , next) => {
 
                     const payment_capture = 1 ;
 
-                    //setting the amount according to the course
+                    //setting the amount according to the bus
                     const amount = Number(cost)  ;
                 
                     const options = {amount : (amount*100).toString()
@@ -240,7 +245,7 @@ module.exports.postRazorpay = async (req , res , next) => {
                     
                     order.orderId = response.id ;
                     await order.save() ;
-                    return res.json({
+                    return res.status(200).json({
                         id:response.id ,
                         currency : response.currency ,
                         amount : response.amount ,

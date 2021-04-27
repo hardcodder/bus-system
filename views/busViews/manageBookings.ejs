@@ -4,7 +4,7 @@
   <%- include('../includes/nav.ejs') %>
   <h2>List of Bookings</h2>
 <hr>
-<ul class="d-flex row justify-content-around no-bullets">
+<ul class="d-flex row justify-content-around no-bullets bus-cards">
     <% bookings.forEach(booking => {%>
         <li class="p-3 mb-5 inner-list rounded col col-xl-3 col-lg-5 col-md-5 col-sm-8 col-10 mx-3">
             <h5 style="text-align: center;"><%=booking.name%></h5>
@@ -17,10 +17,14 @@
             </div>
             <hr>
             <div class="d-flex justify-content-between">
-            <h5><%=booking.from%></h5>
-            <h5>to</h5>
-            <h5><%=booking.to%></h5>
+              <h5><%=booking.from%></h5>
+              <h5>to</h5>
+              <h5><%=booking.to%></h5>
             </div>
+            <input type="hidden" class="input-number" value="<%=booking.number %>" >
+            <button class="btn">Cancel</button>
+            
         </li>
     <%})%>
  </ul>
+<script src="js/cancel.js"></script>
