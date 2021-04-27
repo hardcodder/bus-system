@@ -1,8 +1,20 @@
 # Bus-System (myBus)
 
-Website to help the users to reserve or cancel their seat in a bus.
+Website to help the users to reserve or cancel their seat in a bus. THe user can enter his source and final destination. The website will show him the buses in that route. Based on the availability of the bus, the user can book his seat. He can also cancel his reservations later by going to the My Bookings page.
 
-View the website here : http://getmybus.herokuapp.com/
+Frontend is implemented using HTML, CSS and Bootstrap.
+Learn more about it here: https://developer.mozilla.org/en-US/docs/Web/HTML,
+https://developer.mozilla.org/en-US/docs/Web/CSS,
+https://getbootstrap.com/docs/5.0/getting-started/introduction/
+
+Backend is implemented using Node.js and MongoDB.
+Learn more about them here: https://nodejs.org/api/all.html,
+https://docs.mongodb.com/
+
+For payment, Razorpay has been used.
+Learn more about it here: https://razorpay.com/docs/
+
+- View the website here : http://getmybus.herokuapp.com/
 
 # Building the Code
 
