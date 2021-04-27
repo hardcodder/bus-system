@@ -1,4 +1,4 @@
-# bus-system
+# Bus-System(myBus)
 
 Website to help the users to reserve or cancel their seat in a bus.
 
