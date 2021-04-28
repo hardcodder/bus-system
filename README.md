@@ -18,6 +18,8 @@ Learn more about it here: https://razorpay.com/docs/
 
 - View the website here : http://getmybus.herokuapp.com/
 
+- Currently the user can search buses between Una and Hamirpur, Shimla and Hamirpur, Kangra and Delhi, Nahan and Chandigarh, Baijnath and Kangra.
+
 # Building the Code
 
 - Clone the repository using HTTP: `git clone https://github.com/hardcodder/bus-system.git`
