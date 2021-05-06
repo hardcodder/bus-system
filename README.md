@@ -1,5 +1,15 @@
 # Bus-System (myBus)
 
+ Name: Anshul (185003),
+ Ananya Sharma (185001),
+ Jyoti Sharma (185022),
+ 
+ Course: CSD-327 Software Engineering LAB
+ 
+ Date: May 6th, 2021
+ 
+ Submitted to: Dr. Dharmendra Prasad Mahto
+
 Website to help the users to reserve or cancel their seat in a bus.
 
 - The user can enter his source and final destination. The website will show him the buses in that route. Based on the availability of the bus, the user can book his seat. He can also cancel his reservations later by going to the My Bookings page.
